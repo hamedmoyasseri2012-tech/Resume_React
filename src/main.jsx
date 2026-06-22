@@ -5,7 +5,7 @@ import { RouterProvider } from "react-router/dom";
 import Home from "./Pages/Home";
 import About from "./Pages/About";
 import "./index.css";
-import TemplatePage from "./Pages/TemplatePage";
+import CreateTemplate from "./Pages/CreateTemplate";
 
 const router = createBrowserRouter([
   {
@@ -14,9 +14,11 @@ const router = createBrowserRouter([
   },
   {
     path: "/about",
-    Component: About,
+   Component: About,
   },
-  { path: "/TemplatePage", Component: TemplatePage },
+  {path : "/CreateTemplate",
+  Component : CreateTemplate,}
+  
 ]);
 
 createRoot(document.getElementById("root")).render(
