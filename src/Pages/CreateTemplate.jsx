@@ -1,4 +1,8 @@
 import { MdCloudUpload } from "react-icons/md";
+import { ImLocation } from "react-icons/im";
+import { MdEmail } from "react-icons/md";
+import { FaPhone } from "react-icons/fa6";
+
 import Footer from "../assets/Component/Footer";
 import Header from "../assets/Component/Header";
 
@@ -95,8 +99,31 @@ const CreateTemplate = () => {
               placeholder="Use comma to separate Achievement"
             ></textarea>
           </div>
-          <div className="flex flex-col gap-2 shadow-xl border justify-center items-center text-center">
-            <h1>Your Name</h1>
+          <div className="flex flex-col gap-2 shadow-xl border justify-center items-center w-200 ">
+            <h1 className="text-4xl">Your Name</h1>
+            <div className="flex gap-4 items-center ">
+              <div className="flex gap-3 items-center pb-3">
+                <i>
+                  <ImLocation />
+                </i>
+                <p>Address line</p>
+                <div className="border-r h-7"></div>
+              </div>
+              <div className="flex gap-3 items-center ">
+                <i>
+                  <MdEmail />
+                </i>
+                <p>Email Address</p>
+                <div className="border-r h-7"></div>
+              </div>
+              <div className="flex gap-3 items-center ">
+                <i>
+                  <FaPhone />
+                </i>
+                <p>Phone Number</p>
+                <div className="border-r h-7"></div>
+              </div>
+            </div>
           </div>
         </div>
         <div className="flex gap-4 justify-center items-center">
