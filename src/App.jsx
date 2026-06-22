@@ -5,12 +5,11 @@ import Home from "./Pages/Home";
 import TemplatePage from "./Pages/TemplatePage";
 
 const App = () => {
-  const [step, setStep] = useState("Home");
+
   return (
     <div>
       <Header />
-      <Home step={step} setStep={setStep} />
-      <TemplatePage />
+      <Home />
     </div>
   );
 };

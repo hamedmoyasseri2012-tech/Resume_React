@@ -1,17 +1,12 @@
 import Header from "../assets/Component/Header";
 
-const Home = ({ step, setStep }) => {
-  handlePrev = () => {
-    if (step === "Home") {
-      setStep("TemplatePage");
-    }
-  };
+const Home = () => {
   return (
     <div className="flex flex-col items-center">
       <Header />
-      <div className="flex justify-around   items-center pt-12 gap-20">
+      <div className="flex justify-around   items-center pt-12 gap-20 dark:bg-[#1a202c]">
         <div className="flex flex-col  gap-10 w-160 h-125.5 pt-10 ">
-          <h1 className="text-6xl  text-center font-medium">
+          <h1 className="text-6xl  text-center font-medium dark:text-[#edeff0]">
             Your resume in three<span className="text-[#3cafab]"> easy </span>
             steps
           </h1>
@@ -22,7 +17,7 @@ const Home = ({ step, setStep }) => {
             options, so you can select the template that best fits your needs
             and style.
           </p>
-          <div className="flex flex-col gap-4 text-xl">
+          <div className="flex flex-col gap-4 text-xl dark:text-[#a4a8b3]">
             <div className="flex gap-4 items-center">
               <button className="bg-[#edf2f6] border border-[#edf2f6] rounded-xl w-10 h-10">
                 1
@@ -45,10 +40,7 @@ const Home = ({ step, setStep }) => {
         </div>
         <div className="flex flex-col gap-4">
           <img className="flex" src="./public/home.png" alt="" />
-          <button
-            onClick={handlePrev}
-            className="w-full border rounded-xl bg-[#37b2ad] p-2 text-white"
-          >
+          <button className="w-full border rounded-2xl bg-[#37b2ad] p-2 font-medium text-white dark:text-[#0036300] dark:bg-[#37b2ad]">
             Select Template
           </button>
         </div>
