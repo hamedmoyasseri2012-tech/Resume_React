@@ -1,9 +1,7 @@
-import Header from "../assets/Component/Header";
-
+import { Link } from "react-router";
 const Home = () => {
   return (
     <div className="flex flex-col items-center">
-      <Header />
       <div className="flex justify-around   items-center pt-12 gap-20 dark:bg-[#1a202c]">
         <div className="flex flex-col  gap-10 w-160 h-125.5 pt-10 ">
           <h1 className="text-6xl  text-center font-medium dark:text-[#edeff0]">
@@ -40,9 +38,9 @@ const Home = () => {
         </div>
         <div className="flex flex-col gap-4">
           <img className="flex" src="./public/home.png" alt="" />
-          <button className="w-full border rounded-2xl bg-[#37b2ad] p-2 font-medium text-white dark:text-[#0036300] dark:bg-[#37b2ad]">
+          <Link to = "template-page" className="flex justify-center items-center w-full border rounded-2xl bg-[#37b2ad] p-2 font-medium text-white dark:text-[#0036300] dark:bg-[#37b2ad]">
             Select Template
-          </button>
+          </Link>
         </div>
       </div>
     </div>

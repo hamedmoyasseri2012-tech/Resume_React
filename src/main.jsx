@@ -1,24 +1,30 @@
-import { Component, StrictMode } from "react";
+import { StrictMode } from "react";
 import { createRoot } from "react-dom/client";
 import { createBrowserRouter } from "react-router";
 import { RouterProvider } from "react-router/dom";
-import Home from "./Pages/Home";
 import About from "./Pages/About";
 import "./index.css";
-import CreateTemplate from "./Pages/CreateTemplate";
+import App from "./App";
+import TemplatePage from "./Pages/TemplatePage";
+import CreateTemplate from "./Pages/CreateTemplate"
 
 const router = createBrowserRouter([
   {
-    path: "home",
-    Component: Home,
+    path: "/",
+    Component: App,
   },
   {
     path: "/about",
-   Component: About,
+    Component: About,
   },
-  {path : "/CreateTemplate",
-  Component : CreateTemplate,}
-  
+  {
+    path: "/template-page",
+    Component: TemplatePage,
+  },
+  {
+    path: "/create-template",
+    Component: CreateTemplate,
+  }
 ]);
 
 createRoot(document.getElementById("root")).render(

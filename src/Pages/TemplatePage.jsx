@@ -1,4 +1,5 @@
 import Header from "../assets/Component/Header";
+import { Link } from "react-router";
 
 const TemplatePage = () => {
   return (
@@ -6,13 +7,16 @@ const TemplatePage = () => {
       <div className="pb-20">
         <Header />
         <div className="flex justify-center gap-16 pt-10 items-center ">
-          <div className="w-95 h-49.5">
+          <div to="/create-template" className="w-95 h-49.5">
             <h1 className="text-6xl ">
               Select a <span className="text-[#3bb2ae]">Template</span> from the
               list
             </h1>
           </div>
-          <div className=" grid grid-cols-3 gap-10 justify-center items-center ">
+          <Link
+            to="/create-template"
+            className=" grid grid-cols-3 gap-10 justify-center items-center "
+          >
             <img
               className="w-49.5 h-74.5 border rounded-xl"
               src="./public/template.png"
@@ -38,7 +42,7 @@ const TemplatePage = () => {
               src="./public/template4.jpg"
               alt=""
             />
-          </div>
+          </Link>
         </div>
       </div>
     </>
