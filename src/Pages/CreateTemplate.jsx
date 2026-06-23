@@ -3,11 +3,29 @@ import { ImLocation } from "react-icons/im";
 import { MdEmail } from "react-icons/md";
 import { FaPhone } from "react-icons/fa6";
 import { Link } from "react-router";
+import { useState } from "react";
 
 import Footer from "../assets/Component/Footer";
 import Header from "../assets/Component/Header";
 
 const CreateTemplate = () => {
+   const [form, setForm] = useState({
+     picture: null,
+     name: "",
+     summary: "",
+     workProfile: "",
+     address: "",
+     phone: "",
+     email: "",
+     skills: "",
+     education: [{ title: "", description: "" }],
+     projectsEnabled: true,
+     projects: [{ title: "", description: "" }],
+     experienceEnabled: true,
+     experiences: [{ title: "", description: "" }],
+     awardsEnabled: true,
+     awards: "",
+   });
   return (
     <div>
       <Header />
