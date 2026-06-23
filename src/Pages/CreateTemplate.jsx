@@ -2,6 +2,7 @@ import { MdCloudUpload } from "react-icons/md";
 import { ImLocation } from "react-icons/im";
 import { MdEmail } from "react-icons/md";
 import { FaPhone } from "react-icons/fa6";
+import { Link } from "react-router";
 
 import Footer from "../assets/Component/Footer";
 import Header from "../assets/Component/Header";
@@ -187,9 +188,12 @@ const CreateTemplate = () => {
           <button className="border border-[#62807e] text-[#40776c] w-17.25 h-10 rounded-xl">
             Print
           </button>
-          <button className="border border-[#62807e] text-[#40776c] w-52.75 h-10 rounded-xl">
+          <Link
+            to="/template-page"
+            className="flex justify-center items-center border border-[#62807e] text-[#40776c] w-52.75 h-10 rounded-xl"
+          >
             Select Another Template
-          </button>
+          </Link>
         </div>
       </div>
 
