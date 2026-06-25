@@ -9,23 +9,95 @@ import Footer from "../assets/Component/Footer";
 import Header from "../assets/Component/Header";
 
 const CreateTemplate = () => {
-   const [form, setForm] = useState({
-     picture: null,
-     name: "",
-     summary: "",
-     workProfile: "",
-     address: "",
-     phone: "",
-     email: "",
-     skills: "",
-     education: [{ title: "", description: "" }],
-     projectsEnabled: true,
-     projects: [{ title: "", description: "" }],
-     experienceEnabled: true,
-     experiences: [{ title: "", description: "" }],
-     awardsEnabled: true,
-     awards: "",
-   });
+  const [form, setForm] = useState({
+    picture: null,
+    name: "",
+    summary: "",
+    workProfile: "",
+    address: "",
+    phone: "",
+    email: "",
+    skills: "",
+    education: [{ title: "", description: "" }],
+    projectsEnabled: true,
+    projects: [{ title: "", description: "" }],
+    experienceEnabled: true,
+    experiences: [{ title: "", description: "" }],
+    awardsEnabled: true,
+    awards: "",
+  });
+  const handleChange = (e) => {
+    if (name === "picture") {
+      const file = e.target.files[0];
+
+      setForm((prev) => ({
+        ...prev,
+        picture: file ? URL.createObjectURL(file) : null,
+      }));
+    } else {
+      setForm((prev) => ({
+        ...prev,
+        [e.target.name]: e.target.value,
+      }));
+    }
+  };
+
+  const handleEducationChange = (index, field, value) => {
+    const updated = [...form.education];
+    updated[index][field] = value;
+    setForm((prev) => ({ ...prev, education: updated }));
+  };
+
+  const addEducation = () => {
+    setForm((prev) => ({
+      ...prev,
+      education: [...prev.education, { title: "", description: "" }],
+    }));
+  };
+
+  const handleProjectChange = (index, field, value) => {
+    const updated = [...form.projects];
+    updated[index][field] = value;
+    setForm((prev) => ({ ...prev, projects: updated }));
+  };
+
+  const addProject = () => {
+    setForm((prev) => ({
+      ...prev,
+      projects: [...prev.projects, { title: "", description: "" }],
+    }));
+  };
+
+  const handleExperienceChange = (index, field, value) => {
+    const updated = [...form.experiences];
+    updated[index][field] = value;
+    setForm((prev) => ({ ...prev, experiences: updated }));
+  };
+
+  const addExperience = () => {
+    setForm((prev) => ({
+      ...prev,
+      experiences: [...prev.experiences, { title: "", description: "" }],
+    }));
+  };
+
+  const toggleSection = (section) => {
+    setForm((prev) => ({
+      ...prev,
+      [section]: !prev[section],
+    }));
+  };
+
+  const printResume = () => {
+    window.print();
+  };
+
+  const cleanList = (text) =>
+    text
+      .split(",")
+      .map((item) => item.trim())
+      .filter(Boolean);
+
   return (
     <div>
       <Header />
@@ -37,6 +109,8 @@ const CreateTemplate = () => {
             </h3>
             <div className=" flex gap-3 items-center">
               <label
+                type="file"
+                name="Picture"
                 className="flex justify-center gap-3 border border-[#e6e6e6] rounded-xl w-83.5 h-16 items-center"
                 htmlFor=""
               >
@@ -55,44 +129,103 @@ const CreateTemplate = () => {
               <input
                 className="border-2 w-103.5 h-11 rounded-xl p-2 border-[e2e8f0] text-[#97a0b9] font-bold hover:border-[#0d6efd] "
                 type="text"
+                name="name"
+                value={form.name}
+                onChange={handleChange}
                 placeholder="Your Name"
               />
               <input
                 className="border-2 w-103.5 h-11 rounded-xl p-2 border-[e2e8f0] text-[#97a0b9] font-bold hover:border-[#0d6efd]"
                 type="text"
+                name="summary"
+                value={form.summary}
+                onChange={handleChange}
                 placeholder="Your Summary"
               />
               <input
                 className="border-2 w-103.5 h-11 rounded-xl p-2 border-[e2e8f0] text-[#97a0b9] font-bold hover:border-[#0d6efd]"
                 type="text"
+                name="workProfile"
+                value={form.workProfile}
+                onChange={handleChange}
                 placeholder="Work Profile"
               />
               <input
                 className="border-2 w-103.5 h-11 rounded-xl p-2 border-[e2e8f0] text-[#97a0b9] font-bold hover:border-[#0d6efd]"
                 type="text"
+                name="address"
+                value={form.address}
+                onChange={handleChange}
                 placeholder="Address"
               />
               <input
                 className="border-2 w-103.5 h-11 rounded-xl p-2 border-[e2e8f0] text-[#97a0b9] font-bold hover:border-[#0d6efd]"
                 type="text"
+                name="phone"
+                value={form.phone}
+                onChange={handleChange}
                 placeholder="Phone Number"
               />
               <input
                 className="border-2 w-103.5 h-11 rounded-xl p-2 border-[e2e8f0] text-[#97a0b9] font-bold hover:border-[#0d6efd]"
                 type="text"
+                name="email"
+                value={form.email}
+                onChange={handleChange}
                 placeholder="Email id"
               />
             </div>
             <h3 className="font-bold border-b border-[#cecece] w-103.25 pt-5">
               Technical Skills
             </h3>
-            <input type="text" placeholder="Separate skills by comma" />
+            <input
+              name="skills"
+              type="text"
+              value={form.skills}
+              onChange={handleChange}
+              className="border-2 w-103.5 h-11 rounded-xl p-2 border-[e2e8f0] text-[#97a0b9] font-bold hover:border-[#0d6efd]"
+              placeholder="Separate skills by comma"
+            />
             <h3 className="font-bold border-b border-[#cecece] w-103.25 pt-5">
               Education
             </h3>
-            <button className="border-2 bg-[#309794] w-103.5 h-11 rounded-xl p-2 border-[#309794] text-white font-bold ]">
-              Add Education
-            </button>
+            <div>
+              <button
+                onClick={addEducation}
+                className="border-2 bg-[#309794] w-103.5 h-11 rounded-xl p-2 border-[#309794] text-white font-bold ]"
+              >
+                Add Education
+              </button>
+              <div className="space-y-4">
+                {form.education.map((edu, index) => (
+                  <div key={index} className="p-4 space-y-3">
+                    <input
+                      type="text"
+                      placeholder="Enter Title"
+                      value={edu.title}
+                      onChange={(e) =>
+                        handleEducationChange(index, "title", e.target.value)
+                      }
+                      className="w-full border rounded-lg px-3 py-2"
+                    />
+                    <input
+                      type="text"
+                      placeholder="Use comma to separate description"
+                      value={edu.description}
+                      onChange={(e) =>
+                        handleEducationChange(
+                          index,
+                          "description",
+                          e.target.value,
+                        )
+                      }
+                      className="w-full border rounded-lg px-3 py-2"
+                    />
+                  </div>
+                ))}
+              </div>
+            </div>
+
             <div className="font-bold border-b border-[#cecece] w-103.25 pt-5 flex justify-between pb-3">
               <p>Projects</p>
               <button className="relative h-6 w-10.5 rounded-full bg-teal-500">
@@ -125,40 +258,47 @@ const CreateTemplate = () => {
             ></textarea>
           </div>
           <div className="flex flex-col gap-2 shadow-xl/50 pt-4 border justify-center items-center w-200 p-2 ">
-            <h1 className="text-5xl font-bold">Your Name</h1>
+            <h1 className="text-5xl font-bold">{form.name || "Your Name"}</h1>
             <div className="flex gap-4 items-center justify-center pb-3">
               <div className="flex gap-3 items-center  ">
                 <i className="text-[#6c757c]">
                   <ImLocation />
                 </i>
-                <p className="text-[#d4d7d3] text-xl">Address line</p>
+                <p className="text-[#d4d7d3] text-xl">
+                  {form.address || "address"}
+                </p>
                 <div className="border-r h-7 border-[#d4d7d3]"></div>
               </div>
               <div className="flex gap-3 items-center ">
                 <i className="text-[#6c757c]">
                   <MdEmail />
                 </i>
-                <p className="text-[#d4d7d3] text-xl">Email Address</p>
+                <p className="text-[#d4d7d3] text-xl">
+                  {form.email || "emailAddress"}
+                </p>
                 <div className="border-r h-7 border-[#d4d7d3]"></div>
               </div>
               <div className="flex gap-3 items-center ">
                 <i className="text-[#6c757c]">
                   <FaPhone />
                 </i>
-                <p className="text-[#d4d7d3] text-xl">Phone Number</p>
+                <p className="text-[#d4d7d3] text-xl">
+                  {form.phone || "phoneNumber"}
+                </p>
                 <div className="border-r h-7 border-[#d4d7d3]"></div>
               </div>
+            </div>
+            <div className="text-3xl font-bold">
+              {form.workProfile || "Work Profile"}
             </div>
             <div className="bg-[#d1e4e2] flex items-start justify-self-start text-start w-full p-2 ">
               <h1 className="text-2xl font-bold">TECHNICAL SKILLS</h1>
             </div>
             <div>
               <ul className="flex gap-4 justify-center items-center font-bold text-xl">
-                <li className="bg-[#d5e4da] p-2">Your</li>
-                <li className="bg-[#d5e4da] p-2">Skills</li>
-                <li className="bg-[#d5e4da] p-2">are</li>
-                <li className="bg-[#d5e4da] p-2">shown</li>
-                <li className="bg-[#d5e4da] p-2">here</li>
+                {cleanList(form.skills).map((skill, index) => (
+                  <li key={index}>{skill}</li>
+                ))}
               </ul>
             </div>
             <div className="bg-[#d1e4e2] flex items-start justify-self-start text-start w-full p-2 ">
@@ -175,11 +315,15 @@ const CreateTemplate = () => {
               <h1 className="text-2xl font-bold">EDUCATION</h1>
             </div>
             <div className="flex flex-col gap-2">
-              <h1 className="text-2xl">Education Title</h1>
-              <ul className="list-disc text-[#1A202C] font-medium">
-                <li>Project Description are Shown here</li>
-                <li>with Bullet Points</li>
-              </ul>
+              <h1 className="text-2xl">
+                {form.education.map((edu, index) => (
+                  <div key={index} className="mb-3">
+                    <h3 className="font-semibold">{edu.title}</h3>
+                    <p className="text-gray-700">{edu.description}</p>
+                  </div>
+                ))}
+              </h1>
+              <ul className="list-disc text-[#1A202C] font-medium"></ul>
             </div>
             <div className="bg-[#d1e4e2] flex items-start justify-self-start text-start w-full p-2 ">
               <h1 className="text-2xl font-bold">WORK EXPERIENCE</h1>
@@ -203,7 +347,10 @@ const CreateTemplate = () => {
           </div>
         </div>
         <div className="flex gap-4 justify-center items-center">
-          <button className="border border-[#62807e] text-[#40776c] w-17.25 h-10 rounded-xl">
+          <button
+            onClick={printResume}
+            className="border border-[#62807e] text-[#40776c] w-17.25 h-10 rounded-xl"
+          >
             Print
           </button>
           <Link
